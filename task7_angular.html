@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous"
+  />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta http-equiv="x-UA-Compatible" content="ie=edge" />
+  <body data-ng-app="Resume">
+    <div class="container">
+      <div class="bg-primary text-light col-md-6 mb-0">
+        <h3><center>RESUME CREATOR</center></h3>
+      </div>
+      <form
+        method="post"
+        class="form-horizontal col-md-6 bg-warning"
+        name="main"
+        novalidate="novalidate"
+      >
+        <fieldset data-ng-controller="ResumeCtrl">
+          <div class="form-group">
+            <label class="col-md-6 control-label" for="internName">
+              Name:
+            </label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                id="internName"
+                data-ng-model="intern.name"
+                data-ng-required="true"
+                ng-hide="editorEnabled"
+              />
+              <span
+                class="form-control-static font-italic text-success display-4"
+                ng-show="editorEnabled"
+                >{{ intern.name }}</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label" for="qualification">
+              qualification
+            </label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                id="qualification"
+                data-ng-model="intern.qualification"
+                data-ng-required="true"
+                ng-hide="editorEnabled"
+              />
+              <span
+                class="form-control-static font-italic text-success display-4"
+                ng-show="editorEnabled"
+                >{{ intern.qualification }}</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label" for="skills">
+              Skills:
+            </label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                id="skills"
+                data-ng-model="intern.skills"
+                data-ng-required="true"
+                maxlength="6"
+                only-digits=""
+                ng-hide="editorEnabled"
+              />
+              <span
+                class="form-control-static font-italic text-success display-4"
+                ng-show="editorEnabled"
+                >{{ intern.skills }}</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-6 control-label" for="duration">
+              internship duration
+            </label>
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control"
+                id="duration"
+                data-ng-model="intern.duration"
+                data-ng-required="true"
+                maxlength="8"
+                only-digits=""
+                ng-hide="editorEnabled"
+              />
+              <span
+                class="form-control-static font-italic text-success display-4"
+                ng-show="editorEnabled"
+                >{{ intern.duration }}</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-4 text-right">
+              <button
+                class="btn btn-success"
+                ng-show="editorEnabled"
+                title="Edit"
+                ng-click="edit()"
+              >
+                edit
+              </button>
+              <button
+                class="btn btn-secondary"
+                type="button"
+                ng-hide="editorEnabled"
+                data-ng-click="confirm()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <script>
+      var app = angular.module("Resume", []);
+
+      app.controller("ResumeCtrl", function ($scope) {
+        $scope.editorEnabled = false;
+
+        $scope.confirm = function () {
+          $scope.submitted = true;
+          $scope.editorEnabled = true;
+        };
+        $scope.edit = function () {
+          $scope.editorEnabled = false;
+        };
+      });
+    </script>
+  </body>
+</html>
